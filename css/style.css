@@ -6,6 +6,9 @@ body {
 #vally {
   color: orange;
 }
+.star {
+  color: gold;
+}
 #all-products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
