@@ -223,11 +223,11 @@ const showProducts = (products) => {
                         <h3>${product.title}</h3>
                         <p>Category: ${product.category}</p>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                           <h5><i class="fas fa-star star"></i> ${product.rating.rate}</h5>
-                           <h5><i class="fas fa-user"></i> ${product.rating.count}</h5>
+                           <h5>Ratings: <i class="fas fa-star star"></i> ${product.rating.rate}</h5>
+                           <h5>Reviews: <i class="fas fa-user"></i> ${product.rating.count}</h5>
                         </div>
                         <h2>Price: $ ${product.price}</h2>
-                        <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
+                        <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-warning">add to cart</button>
                         <button id="details-btn" class="btn btn-danger">Details</button>
                     </div>
                   `;
