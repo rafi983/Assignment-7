@@ -222,11 +222,13 @@ const showProducts = (products) => {
                           </div>
                         <h3>${product.title}</h3>
                         <p>Category: ${product.category}</p>
-                        <h5>Customer-rating: ${product.rating.rate}</h5>
-                        <h5>Total-ratings: Rated By ${product.rating.count} <span id="vally">peoples</span></h5>
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                           <h5><i class="fas fa-star star"></i> ${product.rating.rate}</h5>
+                           <h5><i class="fas fa-user"></i> ${product.rating.count}</h5>
+                        </div>
                         <h2>Price: $ ${product.price}</h2>
                         <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-                        <button id="details-btn" class="btn btn-danger" onclick="loadProductDetail('${product.id}')">Details</button>
+                        <button id="details-btn" class="btn btn-danger">Details</button>
                     </div>
                   `;
     document.getElementById("all-products").appendChild(div);
@@ -293,63 +295,6 @@ const updateTotal = () => {
     getInputValue("delivery-charge") +
     getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal.toFixed(2);
-};
-
-function inputChange(event) {
-  const searchedKey = event.target.value.toLowerCase();
-  const productShow = document.getElementById("product-details");
-  productShow.textContent = "";
-  filterProducts(searchedKey);
-}
-
-//  Fetch product detail
-const loadProductDetail = (id) => {
-  fetch(`https://fakestoreapi.com/products/${id}`)
-    .then((res) => res.json())
-    .then((data) => displayProductDetail(data));
-};
-// Display product detail at the top
-const displayProductDetail = (product) => {
-  const cart = document.querySelector(".cart");
-  cart.style.position = "relative";
-
-  window.scrollTo(0, 40);
-  const productShow = document.getElementById("product-details");
-  productShow.textContent = "";
-  const div = document.createElement("div");
-  div.classList.add("card", "text-gray", "p-5");
-  div.innerHTML = `
-  <img src="${product.image}" class="card-img-top" alt="...">
-  <div class="card-body">
-      <h5><span id="vally" class="fw-bold">Product:</span> ${product.title}</h5>
-      <h5><span id="vally" class="fw-bold">Category:</span> ${
-        product.category
-      }</h5>
-      <h5><span id="vally" class="fw-bold">Description:</span> ${product.description.slice(
-        0,
-        60
-      )}</h5>
-      <h5><span id="vally" class="fw-bold">Price:</span>  ${product.price}$</h5>
-
-  </div>
-  `;
-  productShow.appendChild(div);
-};
-
-// searching matched products
-
-const filterProducts = (searchedKey) => {
-  const x = document.getElementsByClassName("single-product");
-
-  for (let i = 0; i < x.length; i++) {
-    const element = x[i];
-
-    if (element.innerText.toLowerCase().includes(searchedKey)) {
-      element.style.display = "block";
-    } else {
-      element.style.display = "none";
-    }
-  }
 };
 
 loadProducts();
